@@ -13,6 +13,9 @@ function getTeamData(team) {
         console.log(this.readyState, this.status);
         if (this.readyState == 4 && this.status == 200) {
             jstuff = JSON.parse(this.responseText); //convert the api response from plaintext to a json array
+
+            $("#main").append(getTeamNameHeader(jstuff.nickname, jstuff.team_number));
+
             var sponsorText = getSponsorHtml(jstuff.name); //get the sponsor html (name is actually sponsors lol)
             $("#main").append(sponsorText); //add it to the end of the div IDed main
         }
@@ -22,6 +25,24 @@ function getTeamData(team) {
     xhttp.setRequestHeader("X-TBA-Auth-Key", "eEw2xnP2lfo4au8unAIYp4xJourubuxF7vz4b1WgHbzmOLQxZHoUomCV1qudfil9");
     xhttp.send();
 };
+
+
+/**
+ * This method creates some html to display the team name header.
+ * @param {*} nickname The name of the team as a string 
+ * @param {*} number The team number
+ */
+function getTeamNameHeader(nickname, number) {
+    if (nickname != null && number != null) {
+        var finalText = "<h3 id='teamName'>";
+        finalText += nickname+" "+number.toString();
+        return finalText;
+    } else {
+        return "";
+    }
+};
+
+
 
 /**
  * This method prepares the sponsors to be displayed given the data from 
@@ -43,4 +64,4 @@ function getSponsorHtml(sponsorList) {
     } else {
         return "";
     }
-}
+};
