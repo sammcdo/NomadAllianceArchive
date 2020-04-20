@@ -8,18 +8,28 @@
     <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src=teamStats.js></script>
+    <style type="text/css">
+        #leftmain {
+            width: 50%;
+            float: left;
+        }
+        #rightmain {
+            width: 50%;
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
     <div class="topnav">
 
-        <a href="index.html" class="w3-bar-item w3-button w3-padding-large"><img
+        <a href="index.html"><img
                 src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
                 alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
-        <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
-        <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+        <a href="teamStats.html">Random Team Info</a>
+        <a href="/">Placeholder</a>
+        <a href="/">Placeholder</a>
+        <a href="emailUs.html">CONTACT</a>
 
         <form action="teamStats.html" method="POST" id="teamSearch">
             <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
@@ -28,12 +38,14 @@
 
 
     </div>
-
-    <div id="main">
-        <div id="teamHeader"></div>
+    <div id="leftmain">
         <div id="teamIcon"></div>
+        <div id="teamHeader"></div>
         <div id=websites></div>
         <div id=sponsors></div>
+    </div>
+    <div id="rightmain">
+        <h3>Team History</h3>
     </div>
     <div class="footer">
         <p>

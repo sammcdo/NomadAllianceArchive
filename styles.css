@@ -62,3 +62,8 @@ padding: 0px;
 .topnav input[type=submit]:hover {
   background-color: #45a049;
 }
+
+#teamIcon {
+  padding: 4px;
+  padding-left: 0px;
+}
