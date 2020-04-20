@@ -7,6 +7,12 @@ var teamData;
 
 
 function getTeamData(team) {
+    getGeneralTeamData(team);
+    getTeamMediaData(team);
+};
+
+
+function getGeneralTeamData(team) {
     console.log("getting Team Data");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -16,9 +22,6 @@ function getTeamData(team) {
 
             $("#teamHeader").append(getTeamNameHeader(jstuff.nickname, jstuff.team_number));
 
-            //currently only Nomad logo supported ;)
-            $("#teamIcon").append(getTeamIcon("iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADiSURBVFhH7ZRZDsIwDAV7H7gYnIQvrsTVeOpElpVFtFHq8JHRE2qMk5HVZVssFvD+3JTn666kUgBYTRzkRpkWOxHi0iqmiS8H6zRxWoQxc9xH5CsLWEkqxTBNbNZQsR/3Qrd9fu17FCHOPn4sS7EqNIwhswqb+0JxaYXq0IMn9uhoH1W8WKFNWMMA/Fl2rd/Szb9l9q0nqW6zEzM3zbod1uDD3qNkG/xBJBP7ZFvUQOU0dsTP0O+fUOo9bpsprd0TTii2oKdf7N2tV67FMLGQ+7i+xwpVdxCIuaCyWCz+jG37AvgPAfUkFDjaAAAAAElFTkSuQmCC"));
-
             $("#websites").append(getTeamWebsites(jstuff.website));
 
             var sponsorText = getSponsorHtml(jstuff.name); //get the sponsor html (name is actually sponsors lol)
@@ -27,6 +30,29 @@ function getTeamData(team) {
     };
     console.log("https://www.thebluealliance.com/api/v3/team/frc" + team.toString());
     xhttp.open("GET", "https://www.thebluealliance.com/api/v3/team/frc" + team.toString(), true);
+    xhttp.setRequestHeader("X-TBA-Auth-Key", "eEw2xnP2lfo4au8unAIYp4xJourubuxF7vz4b1WgHbzmOLQxZHoUomCV1qudfil9");
+    xhttp.send();
+};
+
+function getTeamMediaData(team) {
+    console.log("getting Team Media Data");
+    var d = new Date();
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        console.log(this.readyState, this.status);
+        if (this.readyState == 4 && this.status == 200) {
+            jstuff = JSON.parse(this.responseText); //convert the api response from plaintext to a json array
+            console.log(jstuff);
+            for (item of jstuff) {
+                console.log(item);
+                if (item.foreign_key.startsWith("avatar")) {
+                    console.log("true");
+                    $("#teamIcon").append(getTeamIcon(item.details.base64Image));
+                }
+            }
+        }
+    };
+    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/team/frc"+team.toString()+"/media/"+d.getFullYear(), true);
     xhttp.setRequestHeader("X-TBA-Auth-Key", "eEw2xnP2lfo4au8unAIYp4xJourubuxF7vz4b1WgHbzmOLQxZHoUomCV1qudfil9");
     xhttp.send();
 };
