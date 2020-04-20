@@ -33,3 +33,32 @@ padding: 0px;
   background-color: #ddd;
 
 }
+
+.topnav form {
+  margin-right: 0px;
+}
+
+.topnav input[type=text], select {
+  width: 20%;
+  padding: 6px 10px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.topnav input[type=submit] {
+  width: 4%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 7px 10px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.topnav input[type=submit]:hover {
+  background-color: #45a049;
+}
