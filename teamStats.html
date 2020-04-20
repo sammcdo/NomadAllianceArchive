@@ -24,7 +24,22 @@
         <p>the NOMAD alliance © 2020. Any questions, comments, or concerns? Email sam@theNOMADalliance.com or
             ben@theNOMADalliance.com</p>
     </div>
-    <script>getTeamData(Math.floor(Math.random() * 8428) + 1);</script>
+    <script>
+    var team = Math.floor(Math.random() * 8428) + 1;
+    try {
+    
+        var url = new URL(window.location.href);
+        for (param of url.searchParams.entries()) {
+            console.log(param);
+            if (param[0] == "team") {
+                team = param[1];
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    getTeamData(team);
+    </script>
 </body>
 
 </html>
