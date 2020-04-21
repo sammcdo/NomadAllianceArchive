@@ -10,18 +10,29 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src=constants.js></script>
     <script src=teamStats.js></script>
+    <script src=teamHistory.js></script>
+    <style type="text/css">
+        #leftmain {
+            width: 50%;
+            float: left;
+        }
+        #rightmain {
+            width: 50%;
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
     <div class="topnav">
 
-        <a href="index.html" class="w3-bar-item w3-button w3-padding-large"><img
+        <a href="index.html"><img
                 src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
                 alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
-        <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
-        <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
-        <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+        <a href="teamStats.html">Random Team Info</a>
+        <a href="/">Placeholder</a>
+        <a href="/">Placeholder</a>
+        <a href="emailUs.html">CONTACT</a>
 
         <form action="teamStats.html" method="POST" id="teamSearch">
             <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
@@ -30,12 +41,17 @@
 
 
     </div>
-
-    <div id="main">
+    <div id="leftmain">
         <div id="teamIcon"></div>
         <div id="teamHeader"></div>
         <div id=websites></div>
         <div id=sponsors></div>
+    </div>
+    <div id="rightmain">
+        <h3>Team History</h3>
+        <div id=banners></div>
+        <div id=awards><h4>Other Awards</h4></div>
+        <div id=eventList></div>
     </div>
     <div class="footer">
         <p>
@@ -49,7 +65,6 @@
 
             var url = new URL(window.location.href);
             for (param of url.searchParams.entries()) {
-                console.log(param);
                 if (param[0] == "team") {
                     team = param[1];
                 }
@@ -57,14 +72,8 @@
         } catch (error) {
             console.log(error);
         }
-        getTeamData(team);
+        getTeamHistory(team);
     </script>
-    <script>
-        document.getElementById('teamSearch').onsubmit = function() {
-            window.location = 'https://thenomadalliance.com/teamStats?team=' + document.getElementById('teamSearchName').value;
-            return false;
-        }
-      </script>
 </body>
 
 </html>

@@ -1,91 +1,94 @@
 /**
  * This should load stats on any team.
+ * Requires constants.js
 */
-
 
 var teamData;
 
-
+/**
+ * Set up the teamStats html page.
+ * @param {*} team The team number of the desired team.
+ */
 function getTeamData(team) {
-    getGeneralTeamData(team);
     getTeamMediaData(team);
+    getGeneralTeamData(team);
 };
 
-
+/**
+ * Get all the data we want from a general team api request
+ * (team/frcTEAM)
+ * @param {*} team 
+ */
 function getGeneralTeamData(team) {
     console.log("getting Team Data");
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        console.log(this.readyState, this.status);
-        if (this.readyState == 4 && this.status == 200) {
-            jstuff = JSON.parse(this.responseText); //convert the api response from plaintext to a json array
-
-            $("#teamHeader").append(getTeamNameHeader(jstuff.nickname, jstuff.team_number));
-
-            $("#websites").append(getTeamWebsites(jstuff.website));
-
-            var sponsorText = getSponsorHtml(jstuff.name); //get the sponsor html (name is actually sponsors lol)
-            $("#sponsors").append(sponsorText); //add it to the end of the div IDed main
-        }
-    };
-    console.log("https://www.thebluealliance.com/api/v3/team/frc" + team.toString());
-    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/team/frc" + team.toString(), true);
-    xhttp.setRequestHeader("X-TBA-Auth-Key", "eEw2xnP2lfo4au8unAIYp4xJourubuxF7vz4b1WgHbzmOLQxZHoUomCV1qudfil9");
-    xhttp.send();
+    tbaRequestHandler("team/frc"+team.toString(), processGeneralTeamData);
 };
 
+/**
+ * This function is passed to a tbaRequestHandler by 
+ * getGeneralTeamData
+ * @param {*} jstuff Json from the tba request callback.
+ */
+function processGeneralTeamData(jstuff) {
+    var thing = jstuff;
+    getTeamNameHeader(thing);
+    getTeamWebsites(jstuff);
+    getSponsorHtml(jstuff);
+}
+
+/**
+ * This starts the tba request of the desired media
+ * (mainly Icon)
+ * TBA path: team/frcTEAM/media/YEAR
+ * @param {*} team The desired team number
+ */
 function getTeamMediaData(team) {
     console.log("getting Team Media Data");
     var d = new Date();
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        console.log(this.readyState, this.status);
-        if (this.readyState == 4 && this.status == 200) {
-            jstuff = JSON.parse(this.responseText); //convert the api response from plaintext to a json array
-            console.log(jstuff);
-            for (item of jstuff) {
-                console.log(item);
-                if (item.foreign_key.startsWith("avatar")) {
-                    console.log("true");
-                    $("#teamIcon").append(getTeamIcon(item.details.base64Image));
-                }
-            }
-        }
-    };
-    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/team/frc"+team.toString()+"/media/"+d.getFullYear(), true);
-    xhttp.setRequestHeader("X-TBA-Auth-Key", "eEw2xnP2lfo4au8unAIYp4xJourubuxF7vz4b1WgHbzmOLQxZHoUomCV1qudfil9");
-    xhttp.send();
+    tbaRequestHandler("team/frc"+team.toString()+"/media/"+d.getFullYear(), getTeamIcon);
 };
 
 
 /**
  * This method creates some html to display the team name header.
  * @param {*} nickname The name of the team as a string 
- * @param {*} number The team number
  */
-function getTeamNameHeader(nickname, number) {
-    if (nickname != null && number != null) {
-        var finalText = "<h3 id='teamName'>";
-        finalText += nickname+" "+number.toString();
-        return finalText;
-    } else {
-        return "";
-    }
+function getTeamNameHeader(jstuff) {
+    console.log(jstuff);
+    var finalText = "";
+    //if (jstuff.nickname != null && jstuff.number != null) {
+        finalText += "<h3 id='teamName'>";
+        finalText += jstuff.nickname+" "+jstuff.team_number.toString();
+    //}
+    finalText += "</h3>"
+    $("#teamHeader").append(finalText);
 };
 
 /**
  * Display a teams icon from the base64 data from the TBA api.
  * @param {*} base64data The image data in base64 from the tba api
  */
-function getTeamIcon(base64data) {
-    return `<img style='display:block; width:100px;height:100px;' id='base64image', 
-    src='data:image/jpeg;base64, `+base64data+"' />";
+function getTeamIcon(jstuff) {
+    var text = ""
+    for (media of jstuff) {
+        if (media.foreign_key.startsWith("avatar")) {
+            text = `<img style='display:block; width:100px;height:100px;' id='base64image', 
+            src='data:image/jpeg;base64, `+media.details.base64Image+"' />";
+        }
+    }
+    $("#teamIcon").append(text);
 };
 
 
-
-function getTeamWebsites(websiteList) {
-    if (websiteList != null) {
+/**
+ * This function processes the team website from 
+ * the general team request
+ * @param {*} jstuff Json from tbaRequestHandler
+ */
+function getTeamWebsites(jstuff) {
+    var websiteList = jstuff.website;
+    var finalText = "";
+    if (websiteList != null) { 
         var finalText = "<h4><b>Team Websites</b></h4><ul id='websiteList'>";
 
         // Make an list of the websites by seperating the values at every '/'
@@ -94,11 +97,8 @@ function getTeamWebsites(websiteList) {
         for (site of websites) {
             finalText += "<li><a href='" + site + "'>"+site+"</a></li>";
         }
-
-        return finalText;
-    } else {
-        return "";
     }
+    $("#websites").append(finalText);
 }
 
 
@@ -108,7 +108,9 @@ function getTeamWebsites(websiteList) {
  * the api call and returns some useful html for it.
  * @param {*} sponsorList The raw sponsor data
  */
-function getSponsorHtml(sponsorList) {
+function getSponsorHtml(jstuff) {
+    var sponsorList = jstuff.name;
+    var finalText = "";
     if (sponsorList != null) {
         var finalText = "<h4><b>Sponsors and Contributors</b></h4><ul id='sponsorList'>"; // The text to eventually return.
 
@@ -118,9 +120,20 @@ function getSponsorHtml(sponsorList) {
         for (sponsor of sponsors) {
             finalText += "<li>" + sponsor + "</li>";
         }
-
-        return finalText;
-    } else {
-        return "";
     }
+    $("#sponsors").append(finalText);
 };
+
+
+function tbaRequestHandler(path, callback, ...callbackArgs) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            jstuff = JSON.parse(this.responseText);
+            callback(jstuff, callbackArgs);
+        }
+    };
+    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/"+path, true);
+    xhttp.setRequestHeader("X-TBA-Auth-Key", tbaAuthKey);
+    xhttp.send();
+}

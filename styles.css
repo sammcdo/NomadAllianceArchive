@@ -3,13 +3,14 @@ body {
 }
 .footer {
   background-color: #f1f1f1;
-  position: bottom;
+  position: fixed;
   padding: 10px;
   text-align: center;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 50px;
 }
 .topnav {
   overflow: hidden;
@@ -61,4 +62,9 @@ padding: 0px;
 
 .topnav input[type=submit]:hover {
   background-color: #45a049;
+}
+
+#teamIcon {
+  padding: 4px;
+  padding-left: 0px;
 }
