@@ -21,15 +21,15 @@ function getTeamHistory(team) {
 
 function processTeamAwards(json) {
     var newBanners = "";
-    var newAwards = "<li>";
+    var newAwards = "<ul>";
     for (award of json) {
         if (award.award_type in BannerWorthyAwards) {
             newBanners += "<div>"+award.name+" at "+award.event_key+"</div>";
         } else {
-            newAwards += "<ul>"+award.name+" at "+award.event_key+"</li>";
+            newAwards += "<li>"+award.name+" at "+award.event_key+"</li>";
         }
     }
-    newAwards += "</li>";
+    newAwards += "</ul>";
     $("#banners").append(newBanners);
     $("#awards").append(newAwards);
 };
