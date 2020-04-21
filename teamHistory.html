@@ -2,12 +2,14 @@
 <html>
 
 <head>
+    <meta charset="UTF-8" />
     <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>the NOMAD alliance</title>
     <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src=teamStats.js></script>
+    <script src=constants.js></script>
     <style type="text/css">
         #leftmain {
             width: 50%;
@@ -46,6 +48,9 @@
     </div>
     <div id="rightmain">
         <h3>Team History</h3>
+        <div id=banners></div>
+        <div id=awards><h4>Other Awards</h4></div>
+        <div id=eventList></div>
     </div>
     <div class="footer">
         <p>
@@ -59,7 +64,6 @@
 
             var url = new URL(window.location.href);
             for (param of url.searchParams.entries()) {
-                console.log(param);
                 if (param[0] == "team") {
                     team = param[1];
                 }
@@ -67,7 +71,7 @@
         } catch (error) {
             console.log(error);
         }
-        getTeamData(team);
+        getTeamHistory(team);
     </script>
 </body>
 
