@@ -3,7 +3,6 @@
  * Requires constants.js
 */
 
-
 var teamData;
 
 /**
@@ -14,15 +13,6 @@ function getTeamData(team) {
     getTeamMediaData(team);
     getGeneralTeamData(team);
 };
-
-/**
- * Set up the teamHistory html page.
- * @param {*} team The team number of the desired team.
- */
-function getTeamHistory(team) {
-    getTeamData(team);
-    getTeamAwards(team);
-}
 
 /**
  * Get all the data we want from a general team api request
@@ -40,7 +30,8 @@ function getGeneralTeamData(team) {
  * @param {*} jstuff Json from the tba request callback.
  */
 function processGeneralTeamData(jstuff) {
-    getTeamNameHeader(jstuff);
+    var thing = jstuff;
+    getTeamNameHeader(thing);
     getTeamWebsites(jstuff);
     getSponsorHtml(jstuff);
 }
@@ -61,14 +52,15 @@ function getTeamMediaData(team) {
 /**
  * This method creates some html to display the team name header.
  * @param {*} nickname The name of the team as a string 
- * @param {*} number The team number
  */
 function getTeamNameHeader(jstuff) {
+    console.log(jstuff);
     var finalText = "";
-    if (jstuff.nickname != null && jstuff.number != null) {
-        var finalText = "<h3 id='teamName'>";
-        finalText += jstuff.nickname+" "+jstuff.number.toString();
-    }
+    //if (jstuff.nickname != null && jstuff.number != null) {
+        finalText += "<h3 id='teamName'>";
+        finalText += jstuff.nickname+" "+jstuff.team_number.toString();
+    //}
+    finalText += "</h3>"
     $("#teamHeader").append(finalText);
 };
 
@@ -132,38 +124,13 @@ function getSponsorHtml(jstuff) {
     $("#sponsors").append(finalText);
 };
 
-/**
- * Process the previous awards of the team.
- * @param {*} team The desired team number
- */
-function getTeamAwards(team) {
-    console.log("getting Team Awards Data");
-    tbaRequestHandler("team/frc"+team+"/awards", processTeamAwards);
-};
 
-
-function processTeamAwards(json) {
-    var newBanners = "";
-    var newAwards = "<li>";
-    for (award of json) {
-        if (award.award_type in BannerWorthyAwards) {
-            newBanners += "<div>"+award.name+"</div>";
-        } else {
-            newAwards += "<ul>"+award.name+"</li>";
-        }
-    }
-    newAwards += "</li>";
-    $("#banners").append(newBanners);
-    $("#awards").append(newAwards);
-};
-
-
-function tbaRequestHandler(path, callback) {
+function tbaRequestHandler(path, callback, ...callbackArgs) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             jstuff = JSON.parse(this.responseText);
-            callback(jstuff);
+            callback(jstuff, callbackArgs);
         }
     };
     xhttp.open("GET", "https://www.thebluealliance.com/api/v3/"+path, true);
