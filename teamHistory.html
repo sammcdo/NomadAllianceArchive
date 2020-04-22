@@ -59,12 +59,23 @@
             <a href="emailUs.html">Sam and Ben</a>.
         </p>
     </div>
-  <script>
-    document.getElementById('teamSearch').onsubmit = function() {
-        window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
+  
+<script>
+        var team = Math.floor(Math.random() * 8428) + 1;	    document.getElementById('teamSearch').onsubmit = function() {
+        try {	        window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
+
         return false;
-    }
-  </script>
+            var url = new URL(window.location.href);	    }
+            for (param of url.searchParams.entries()) {	  </script>
+                if (param[0] == "team") {	
+                    team = param[1];	
+                }	
+            }	
+        } catch (error) {	
+            console.log(error);	
+        }	
+        getTeamHistory(team);	
+    </script>
 </body>
 
 </html>
