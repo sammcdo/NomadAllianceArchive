@@ -2,21 +2,41 @@
 <html>
 
 <head>
-    <meta charset="UTF-8" />
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <title>the NOMAD alliance</title>
-    <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>the NOMAD alliance</title>
+  <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src=main.js></script>
 </head>
 
 <body>
+  <div class="topnav">
+
+    <a href="/" class="w3-bar-item w3-button w3-padding-large"><img
+        src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
+        alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
+    <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
+    <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
+    <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
+    <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+
+    <form action="teamHistory.html" method="POST" id="teamSearch">
+      <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
+      <input type="submit" value="Submit">
+    </form>
+
+
+  </div>
+<center>
     <form enctype="text/plain" method="get" action="mailto:sam@theNOMADalliance.com,ben@thenomadalliance.com">
         Your First Name: <input type="text" name="first_name"><br>
         Your Last Name: <input type="text" name="last_name"><br>
         Comments: <textarea rows="5" cols="30" name="comments"></textarea><br>
         <input type="submit" value="Send">
     </form>
-
+</center>
 
     <div class="footer">
         <p>
