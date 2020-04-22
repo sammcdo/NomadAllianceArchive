@@ -8,7 +8,8 @@
   <title>the NOMAD alliance</title>
   <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-  <script src=main.js></script>
+  <script src=constants.js></script>
+  <script src=teamStats.js></script>
 </head>
 
 <body>
@@ -45,6 +46,12 @@
             <a href="emailUs.html">Sam and Ben</a>.
         </p>
     </div>
+  <script>
+        document.getElementById('teamSearch').onsubmit = function() {
+            window.location = 'https://thenomadalliance.com/teamStats?team=' + document.getElementById('teamSearchName').value;
+            return false;
+        }
+      </script>
 </body>
 
 </html>
