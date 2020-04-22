@@ -3,7 +3,7 @@ body {
 }
 .footer {
   background-color: #f1f1f1;
-  position: fixed;
+  position: static;
   padding: 10px;
   text-align: center;
   position: fixed;
