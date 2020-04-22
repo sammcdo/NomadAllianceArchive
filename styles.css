@@ -38,7 +38,9 @@ padding: 0px;
 .topnav form {
   margin-right: 0px;
 }
-
+form {
+padding: 30px;
+}
 .topnav input[type=text], select {
   width: 20%;
   padding: 6px 10px;
