@@ -3,7 +3,7 @@ body {
 }
 .footer {
   background-color: #f1f1f1;
-  position: fixed;
+  position: static;
   padding: 10px;
   text-align: center;
   position: fixed;
@@ -38,7 +38,9 @@ padding: 0px;
 .topnav form {
   margin-right: 0px;
 }
-
+.form {
+padding: 30px;
+}
 .topnav input[type=text], select {
   width: 20%;
   padding: 6px 10px;
@@ -67,4 +69,10 @@ padding: 0px;
 #teamIcon {
   padding: 4px;
   padding-left: 0px;
+}
+.eventList {
+  padding-bottom: 100px;
+}
+.rightmain {
+  padding-bottom: 100px;
 }
