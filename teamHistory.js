@@ -34,15 +34,16 @@ function processTeamAwards(json) {
     $("#awards").append(newAwards);
 };
 
-function processTeamEvents(jstuff, team) {
+function processTeamEvents(jstuff, params) {
     var finalText = "";
-    var team = team;
+    var team = params[0];
     for (event of jstuff) {
         var eventtext = "<div class='event' id='"+event.key+"'><h5>"+event.year+" "+event.name+"</h5></div>";
         $("#eventList").append(eventtext);
-        
+
         tbaRequestHandler("event/"+event.key+"/oprs", updateOprs, event.key, team);
-        function updateOprs(jstuff2, params, team) {
+
+        function updateOprs(jstuff2, params) {
             tableText = "";
             try {
                 opr = parseFloat(jstuff2["oprs"]["frc"+params[1].toString()]);
@@ -58,12 +59,10 @@ function processTeamEvents(jstuff, team) {
                 tableText += `
                 <table class='eventTable' id='`+params[0]+`'>
                 <tr>
-                <td>OPR: `+opr.toString()+`</td>
-                <td>DPR: `+dpr.toString()+`</td>
-                </tr>
-                <tr>
-                <td>CCWM: `+ccwm.toString()+`
-                <td>NPR: `+npr.toString()+`
+                <td><b>OPR:</b> `+opr.toString()+`</td>
+                <td><b>DPR:</b> `+dpr.toString()+`</td>
+                <td><b>CCWM:</b> `+ccwm.toString()+`</td>
+                <td><b>NPR:</b> `+npr.toString()+`</td>
                 </tr>
                 </table>
                 `
