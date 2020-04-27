@@ -74,6 +74,12 @@
         }
         getTeamHistory(team);
     </script>
+    <script>
+        document.getElementById('teamSearch').onsubmit = function() {
+            window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
+            return false;
+        }
+      </script>
 </body>
 
 </html>
