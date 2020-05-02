@@ -90,3 +90,17 @@ padding: 30px;
   display: table;
   clear: both;
 }
+
+.column1 {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+/* Clearfix (clear floats) */
+.row1::after {
+  content: "";
+  clear: both;
+  display: table;
+}
