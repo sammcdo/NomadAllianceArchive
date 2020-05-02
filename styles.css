@@ -76,15 +76,11 @@ padding: 30px;
 .rightmain {
   padding-bottom: 100px;
 }
-
-
-.row {
-box-sizing: border-box;
-}
 .column {
   float: left;
   width: 50%;
   padding: 10px;
+ box-sizing: border-box;
   
 }
 
