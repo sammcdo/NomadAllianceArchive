@@ -15,38 +15,40 @@
 <body>
   <div class="topnav">
 
-    <a href="/" class="w3-bar-item w3-button w3-padding-large"><img
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large"><img
         src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
         alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
     <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
-    <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
-    <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Placeholder</a>
+    <a href="resourcelibrary.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Resource Library</a>
+    <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
     <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
 
     <form action="teamHistory.html" method="POST" id="teamSearch">
       <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
-      <input type="submit" value="Submit">
+      <input type="submit" value="Go!">
     </form>
 
 
   </div>
-<div class="form">
-<center>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdKbeDrv2XBYKc4dH1Xw6RS6tAvZEAQQEqgpXQ1Wnqkgfl7kQ/viewform?embedded=true" width="640" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-</center>
+  <div class="form">
+    <center>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdKbeDrv2XBYKc4dH1Xw6RS6tAvZEAQQEqgpXQ1Wnqkgfl7kQ/viewform?embedded=true"
+        width="640" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </center>
   </div>
-    <div class="footer">
-        <p>
-            the NOMAD alliance © 2020. Any questions, comments, or concerns? Email
-            <a href="emailUs.html">Sam and Ben</a>.
-        </p>
-    </div>
+  <div class="footer">
+    <p>
+      the NOMAD alliance © 2020. Any questions, comments, or concerns? Email
+      <a href="emailUs.html">Sam and Ben</a>.
+    </p>
+  </div>
   <script>
-        document.getElementById('teamSearch').onsubmit = function() {
-            window.location = 'https://thenomadalliance.com/teamStats?team=' + document.getElementById('teamSearchName').value;
-            return false;
-        }
-      </script>
+    document.getElementById('teamSearch').onsubmit = function () {
+      window.location = 'https://thenomadalliance.com/teamStats?team=' + document.getElementById('teamSearchName').value;
+      return false;
+    }
+  </script>
 </body>
 
 </html>

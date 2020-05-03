@@ -21,7 +21,7 @@ function getTeamData(team) {
  */
 function getGeneralTeamData(team) {
     console.log("getting Team Data");
-    tbaRequestHandler("team/frc"+team.toString(), processGeneralTeamData);
+    tbaRequestHandler("team/frc" + team.toString(), processGeneralTeamData);
 };
 
 /**
@@ -45,7 +45,7 @@ function processGeneralTeamData(jstuff) {
 function getTeamMediaData(team) {
     console.log("getting Team Media Data");
     var d = new Date();
-    tbaRequestHandler("team/frc"+team.toString()+"/media/"+d.getFullYear(), getTeamIcon);
+    tbaRequestHandler("team/frc" + team.toString() + "/media/" + d.getFullYear(), getTeamIcon);
 };
 
 
@@ -57,8 +57,8 @@ function getTeamNameHeader(jstuff) {
     console.log(jstuff);
     var finalText = "";
     //if (jstuff.nickname != null && jstuff.number != null) {
-        finalText += "<h3 id='teamName'>";
-        finalText += jstuff.nickname+" "+jstuff.team_number.toString();
+    finalText += "<h3 id='teamName'>";
+    finalText += jstuff.nickname + " " + jstuff.team_number.toString();
     //}
     finalText += "</h3>"
     $("#teamHeader").append(finalText);
@@ -73,7 +73,7 @@ function getTeamIcon(jstuff) {
     for (media of jstuff) {
         if (media.foreign_key.startsWith("avatar")) {
             text = `<img style='display:block; width:100px;height:100px;' id='base64image', 
-            src='data:image/jpeg;base64, `+media.details.base64Image+"' />";
+            src='data:image/jpeg;base64, `+ media.details.base64Image + "' />";
         }
     }
     $("#teamIcon").append(text);
@@ -88,14 +88,14 @@ function getTeamIcon(jstuff) {
 function getTeamWebsites(jstuff) {
     var websiteList = jstuff.website;
     var finalText = "";
-    if (websiteList != null) { 
+    if (websiteList != null) {
         var finalText = "<h4><b>Team Websites</b></h4><ul id='websiteList'>";
 
         // Make an list of the websites by seperating the values at every '/'
         var websites = websiteList.split("  ");
         var site; // An empty variable to use in the for loop.
         for (site of websites) {
-            finalText += "<li><a href='" + site + "'>"+site+"</a></li>";
+            finalText += "<li><a href='" + site + "'>" + site + "</a></li>";
         }
     }
     $("#websites").append(finalText);
@@ -133,7 +133,7 @@ function tbaRequestHandler(path, callback, ...callbackArgs) {
             callback(jstuff, callbackArgs);
         }
     };
-    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/"+path, true);
+    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/" + path, true);
     xhttp.setRequestHeader("X-TBA-Auth-Key", tbaAuthKey);
     xhttp.send();
 }

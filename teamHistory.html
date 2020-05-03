@@ -16,6 +16,7 @@
             width: 50%;
             float: left;
         }
+
         #rightmain {
             width: 50%;
             float: right;
@@ -26,17 +27,17 @@
 <body>
     <div class="topnav">
 
-        <a href="index.html"><img
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large"><img
                 src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
                 alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
-        <a href="teamStats.html">Random Team Info</a>
-        <a href="/">Placeholder</a>
-        <a href="/">Placeholder</a>
-        <a href="emailUs.html">CONTACT</a>
+        <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
+        <a href="resourcelibrary.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Resource Library</a>
+        <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+        <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
 
         <form action="teamHistory.html" method="POST" id="teamSearch">
             <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
-            <input type="submit" value="Submit">
+            <input type="submit" value="Go!">
         </form>
 
 
@@ -50,7 +51,9 @@
     <div id="rightmain">
         <h3>Team History</h3>
         <div id=banners></div>
-        <div id=awards><h4>Other Awards</h4></div>
+        <div id=awards>
+            <h4>Other Awards</h4>
+        </div>
         <div id=eventList></div>
     </div>
     <div class="footer">
@@ -59,7 +62,7 @@
             <a href="emailUs.html">Sam and Ben</a>.
         </p>
     </div>
-  <script>
+    <script>
         var team = Math.floor(Math.random() * 8428) + 1;
         try {
 
@@ -75,11 +78,11 @@
         getTeamHistory(team);
     </script>
     <script>
-        document.getElementById('teamSearch').onsubmit = function() {
+        document.getElementById('teamSearch').onsubmit = function () {
             window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
             return false;
         }
-      </script>
+    </script>
 </body>
 
 </html>
