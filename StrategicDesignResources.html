@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>the NOMAD alliance</title>
+    <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src=main.js></script>
+    <base target="_blank" rel="noopener noreferrer"> <!-- Make links open in a new tab -->
+</head>
+
+<body>
+    <div class="topnav">
+
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large"><img
+                src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
+                alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
+        <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
+        <a href="resourcelibrary.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Resource Library</a>
+        <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+        <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+
+        <form action="teamHistory.html" method="POST" id="teamSearch">
+            <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
+            <input type="submit" value="Go!">
+        </form>
+
+
+    </div>
+
+    <br>
+    <b>*This page is currently under development*</b><br><br>
+
+    <div class="resources">
+
+        <p>
+            <b>Welcome to the Strategy and Scouting Docs!</b> Here you can find plenty of helpful tools
+            to help you form your stategy and assist in your scouting.
+        </p>
+        <h3>Scouting</h3>
+        <table>
+            <tr>
+                <th>Resource Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><a href="https://www.thebluealliance.com/">The Blue Alliance</a></td>
+                <td>The site that made this all possible, TBA has tons of information on their website and an amazing
+                    API for developers. Its fun to browse to keep up to date on all your favorite teams.</td>
+            </tr>
+            <tr>
+                <td><a href="http://viperbotsvalor6800.com/scout/">Viper Scout</a></td>
+                <td>This site gives amazing insights into any event happening at the time, including OPRs and match
+                    predictions.</td>
+            </tr>
+            <tr>
+                <td><a href="https://frc.divisions.co/">FRC Devisions</a></td>
+                <td>There is no better way to find out how you stand in the championship devisions. It allows you to
+                    compare the stats of tons of teams, based on which championship and which division they are a part
+                    of.</td>
+            </tr>
+        </table>
+
+        <br>
+
+        <h3>Documentation</h3>
+        <table>
+            <tr>
+                <th>Resource Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><a href="https://docs.wpilib.org/en/latest/index.html">WPILIB C++ and Java Official
+                        Documentation</a></td>
+                <td>Here you will find WPI's docs for using any of the code libraries provided with the main
+                    Installation.</td>
+            </tr>
+            <tr>
+                <td><a href="https://www.revrobotics.com/sparkmax-software/">REV Robotics Spark Max Software Guides</a>
+                </td>
+                <td>Browsing around here will help you solve most common problems when using Spark Maxs. It has the docs
+                    so you
+                    can use all the features they have to offer.</td>
+            </tr>
+            <tr>
+                <td><a href="https://phoenix-documentation.readthedocs.io/en/latest/#">CTRE Documentation</a></td>
+                <td>This site is an excellent resource for coding all things CTRE: Talon SRXs, Victor SPXs, Falcon 500s,
+                    PDPs,
+                    or PCMs.</td>
+            </tr>
+            <tr>
+                <td><a href="https://docs.limelightvision.io/en/latest/">Limelight Docs</a></td>
+                <td>The Documentation found here is critical to getting the most out of your Limelight.</td>
+            </tr>
+            <tr>
+                <td><a href="https://pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/">NavX Docs</a></td>
+                <td>When programming with a NavX, this site is quite helpful.</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="footer">
+        <p>
+            The NOMAD Alliance © 2020. Any questions, comments, or concerns? Email
+            <a href="emailUs.html">Sam and Ben</a>.
+        </p>
+    </div>
+    <script>
+        document.getElementById('teamSearch').onsubmit = function () {
+            window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
+            return false;
+        }
+    </script>
+</body>
+
+</html>
