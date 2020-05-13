@@ -11,6 +11,11 @@
     <script src=constants.js></script>
     <script src=events.js></script>
     <base target="_blank" rel="noopener noreferrer">
+    <style type="text/css">
+        table td tr th {
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,6 +60,7 @@
             console.log(error);
         }
         getEvent(event);
+        sortTable(0);
         console.log(event)
     </script>
     <script>

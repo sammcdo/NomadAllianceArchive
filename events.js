@@ -6,14 +6,34 @@ function processEventTeams(json) {
     header = `
     <th id="tname" onclick="sortTable(0)">Team Name</th>
     <th id="tnum" onclick="sortTableNumber(1)">Team Number</th>
+    <th id="trank" onclick="sortTableNumber(2)">Wins</th>
+    <th id="tbanners" onclick="sortTableNumber(3)">Banners</th>
     `
     $("#eventTableHeaders").append(header);
     for (team of json) {
         text = "<tr id='"+team["key"]+"'>";
-        text += "<td>"+team["nickname"]+"</td>";
+        text += "<td><a href='teamHistory.html?team="+team["team_number"]+"'>"+team["nickname"]+"</a></td>";
         text += "<td>"+team["team_number"]+"</td>";
+        text += "<td>0</td>";
+        text += "<td>0</td>";
         text += "</tr>";
         $("#eventTableBody").append(text);
+
+        tbaRequestHandler("team/"+team["key"]+"/awards", pastEventInfo, team["key"])
+    }
+}
+
+
+function pastEventInfo(json, params) {
+    row = document.getElementById(params[0]);
+    cols = row.getElementsByTagName("TD");
+    for (award of json) {
+        if (award.award_type in BannerWorthyAwards) {
+            cols[3].innerHTML = Number(cols[3].innerHTML) + 1;
+        }
+        if (award.award_type == AwardTypes.WINNER) {
+            cols[2].innerHTML = Number(cols[2].innerHTML) + 1;
+        }
     }
 }
 
