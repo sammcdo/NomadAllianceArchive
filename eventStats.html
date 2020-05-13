@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>the NOMAD alliance</title>
+    <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src=constants.js></script>
+    <script src=events.js></script>
+    <base target="_blank" rel="noopener noreferrer">
+</head>
+
+<body>
+    <div class="topnav">
+
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large"><img
+                src="https://github.com/sammcdo/sammcdo.github.io/blob/master/Scorpion.png?raw=true"
+                alt="The NOMAD Alliance Home" style="width:26px;border:0;"> The NOMAD Alliance</a>
+        <a href="teamStats.html" class="w3-bar-item w3-button w3-padding-large">Random Team Info</a>
+        <a href="resourcelibrary.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Resource Library</a>
+        <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+        <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+
+        <form action="teamHistory.html" method="POST" id="teamSearch">
+            <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
+            <input type="submit" value="Go!">
+        </form>
+
+
+    </div>
+    <div id="main">
+        <table id="eventTable">
+            <thead><tr id=eventTableHeaders></tr></thead>
+            <tbody id="eventTableBody"></tbody>
+        </table>
+    </div>
+    <p>
+        the NOMAD alliance © 2020. Any questions, comments, or concerns? Email
+        <a href="emailUs.html">Sam and Ben</a>.
+    </p>
+    </div>
+    <script>
+        try {
+
+            var url = new URL(window.location.href);
+            for (param of url.searchParams.entries()) {
+                if (param[0] == "event") {
+                    event = param[1];
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        getEvent(event);
+        console.log(event)
+    </script>
+    <script>
+        document.getElementById('teamSearch').onsubmit = function () {
+            window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
+            return false;
+        }
+    </script>
+</body>
+
+</html>
