@@ -9,7 +9,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src=constants.js></script>
-    <script src=teamStats.js></script>
+    <script src=events.js></script>
+    <base target="_blank" rel="noopener noreferrer">
+    <style type="text/css">
+        table td tr th {
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,37 +37,36 @@
             <input type="text" id="eventSearchName" name="team" placeholder="Enter event code (ex. 2020casd)...">
             <input type="submit" value="Go!">
           </form>
+    </div>
 
 
     </div>
-    <h5>(Please reload if nothing is showing)</h5>
     <div id="main">
-        <div id="teamIcon"></div>
-        <div id="teamHeader"></div>
-        <div id=websites></div>
-        <div id=sponsors></div>
+        <table id="eventTable">
+            <thead><tr id=eventTableHeaders></tr></thead>
+            <tbody id="eventTableBody"></tbody>
+        </table>
     </div>
-    <div class="footer">
-        <p>
-            the NOMAD alliance © 2020. Any questions, comments, or concerns? Email
-            <a href="emailUs.html">Sam and Ben</a>.
-        </p>
+    <p>
+        the NOMAD alliance © 2020. Any questions, comments, or concerns? Email
+        <a href="emailUs.html">Sam and Ben</a>.
+    </p>
     </div>
     <script>
-        var team = Math.floor(Math.random() * 8428) + 1;
         try {
 
             var url = new URL(window.location.href);
             for (param of url.searchParams.entries()) {
-                console.log(param);
-                if (param[0] == "team") {
-                    team = param[1];
+                if (param[0] == "event") {
+                    event = param[1];
                 }
             }
         } catch (error) {
             console.log(error);
         }
-        getTeamData(team);
+        getEvent(event);
+        sortTable(0);
+        console.log(event)
     </script>
     <script>
         document.getElementById('teamSearch').onsubmit = function () {
@@ -69,8 +74,6 @@
             return false;
         }
     </script>
-    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""></noscript>
 </body>
 
 </html>

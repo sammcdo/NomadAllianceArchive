@@ -24,7 +24,9 @@ function processTeamAwards(json) {
     var newAwards = "<ul>";
     for (award of json) {
         if (award.award_type in BannerWorthyAwards) {
-            newBanners += "<div>" + award.name + " at " + award.event_key + "</div>";
+            newBanners += "<div class='banner'>" 
+            newBanners += "<img src='https://www.thebluealliance.com/images/first_icon.svg'>"
+            newBanners += award.name + " at " + award.event_key + "</div>";
         } else {
             newAwards += "<li>" + award.name + " at " + award.event_key + "</li>";
         }

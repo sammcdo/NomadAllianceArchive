@@ -123,17 +123,3 @@ function getSponsorHtml(jstuff) {
     }
     $("#sponsors").append(finalText);
 };
-
-
-function tbaRequestHandler(path, callback, ...callbackArgs) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            jstuff = JSON.parse(this.responseText);
-            callback(jstuff, callbackArgs);
-        }
-    };
-    xhttp.open("GET", "https://www.thebluealliance.com/api/v3/" + path, true);
-    xhttp.setRequestHeader("X-TBA-Auth-Key", tbaAuthKey);
-    xhttp.send();
-}
