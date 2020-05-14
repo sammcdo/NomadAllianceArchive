@@ -35,53 +35,51 @@
 
   </div>
   <br>
-  
-<script language="JavaScript" type="text/javascript">
+
+  <script language="JavaScript" type="text/javascript">
 
 
 
 
 
 
-function center_distance(dataform,pitch,N1,N2,nlinks)
-{
-	
-   
-      
-	 var a,b,c,d,e;
-	 
-	 a = pitch / 8;	 
-	 b = 2 * nlinks - N1 - N2;	 
-	 c = b*b;	 
-	 d = 8/(Math.PI * Math.PI);	 
-	 e =  N1 - N2 ;
-	 e = e*e;
-	
-     dataform.distance.value = a * (b + Math.sqrt(c - d * e ));
-     dataform.ratio.value = N2/N1;
-     
- }
-
-function chain_length(dataform,pitch,N1,N2,distance)
-{
+    function center_distance(dataform, pitch, N1, N2, nlinks) {
 
 
-    var a,b,c;
-    
-    a = (N1-N2)/(2 * Math.PI);
-    a = a * a;
-    
-    dataform.links.value = (2*distance/pitch+N1/2+N2/2+ a /(distance/pitch));
-    dataform.length.value = pitch * dataform.links.value;
-    dataform.ratio.value = N2/N1;
 
-}
+      var a, b, c, d, e;
+
+      a = pitch / 8;
+      b = 2 * nlinks - N1 - N2;
+      c = b * b;
+      d = 8 / (Math.PI * Math.PI);
+      e = N1 - N2;
+      e = e * e;
+
+      dataform.distance.value = a * (b + Math.sqrt(c - d * e));
+      dataform.ratio.value = N2 / N1;
+
+    }
+
+    function chain_length(dataform, pitch, N1, N2, distance) {
+
+
+      var a, b, c;
+
+      a = (N1 - N2) / (2 * Math.PI);
+      a = a * a;
+
+      dataform.links.value = (2 * distance / pitch + N1 / 2 + N2 / 2 + a / (distance / pitch));
+      dataform.length.value = pitch * dataform.links.value;
+      dataform.ratio.value = N2 / N1;
+
+    }
 
 
 
 
-</script>
-<p>
+  </script>
+  <p>
 
 
 
@@ -89,95 +87,157 @@ function chain_length(dataform,pitch,N1,N2,distance)
 
 
 
-</p><form name="distance_form" action="">
-<table border="3" cellpadding="3" bgcolor="white" align="center" width="700">
-<tbody><tr><th colspan="2">Sprocket Center Distance Calculator</th></tr>
+  </p>
+  <form name="distance_form" action="">
+    <table border="3" cellpadding="3" bgcolor="white" align="center" width="700">
+      <tbody>
+        <tr>
+          <th colspan="2">Sprocket Center Distance Calculator</th>
+        </tr>
 
-<tr>
-<td align="center" width="450"> <b>Input</b>
-</td>
-<td align="center"><b>Output</b>
-</td>
-</tr>
+        <tr>
+          <td align="center" width="450"> <b>Input</b>
+          </td>
+          <td align="center"><b>Output</b>
+          </td>
+        </tr>
 
-<tr><td align="right">
+        <tr>
+          <td align="right">
 
-<table>
-<tbody><tr>
-<td>Chain Pitch (inches)</td><td> <input type="text" name="pitch" value=".25" size="5" align="right" maxlength="5"></td></tr>
-<tr><td>Drive Sprocket Teeth</td><td> <input type="text" name="drive_teeth" size="4" align="right" maxlength="4"></td></tr>
-<tr><td>Driven Sprocket Teeth </td><td><input type="text" name="driven_teeth" size="4" align="right" maxlength="4"></td></tr>
-<tr><td>Links in  chain </td><td> <input type="text" name="links" size="4" align="right" maxlength="4"></td></tr>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Chain Pitch (inches)</td>
+                  <td> <input type="text" name="pitch" value=".25" size="5" align="right" maxlength="5"></td>
+                </tr>
+                <tr>
+                  <td>Drive Sprocket Teeth</td>
+                  <td> <input type="text" name="drive_teeth" size="4" align="right" maxlength="4"></td>
+                </tr>
+                <tr>
+                  <td>Driven Sprocket Teeth </td>
+                  <td><input type="text" name="driven_teeth" size="4" align="right" maxlength="4"></td>
+                </tr>
+                <tr>
+                  <td>Links in chain </td>
+                  <td> <input type="text" name="links" size="4" align="right" maxlength="4"></td>
+                </tr>
 
-</tbody></table>
+              </tbody>
+            </table>
 
-<input type="button" value="COMPUTE" onclick="center_distance(this.form,form.pitch.value,form.drive_teeth.value,form.driven_teeth.value, form.links.value)">
+            <input type="button" value="COMPUTE"
+              onclick="center_distance(this.form,form.pitch.value,form.drive_teeth.value,form.driven_teeth.value, form.links.value)">
 
-</td>
+          </td>
 
-<td align="right">
-<table>
-<tbody><tr><td>Center Distance</td><td> <input name="distance" size="6" readonly=""></td></tr>
-<tr><td>Reduction Ratio</td><td> <input name="ratio" size="6" readonly=""></td></tr>
-</tbody></table>
-</td>
- </tr>
-
-
-
-<tr>
-
-    </font>
-    </td></tr>
- </tbody></table>
- </form>
- 
- 
- <p>
-
-</p><form name="chain_length_form" action="">
-<table border="3" cellpadding="3" bgcolor="white" align="center" width="700">
-<tbody><tr><th colspan="2">Chain Length Calculator</th></tr>
-
-<tr>
-<td align="center" width="450"> <b>Input</b>
-</td>
-<td align="center"><b>Output</b>
-</td>
-</tr>
-
-<tr><td align="right">
-
-
-<table> 
-<tbody><tr><td>Chain Pitch (inches) </td><td> <input type="text" name="pitch" value=".25" size="5" align="right" maxlength="5"></td></tr>
-<tr><td>Drive Sprocket Teeth </td><td> <input type="text" name="drive_teeth" size="4" align="right" maxlength="4"></td></tr>
-<tr><td>Driven Sprocket Teeth </td><td> <input type="text" name="driven_teeth" size="4" align="right" maxlength="4"></td></tr>
-<tr><td>Center Distance (inches) </td><td> <input type="text" name="distance" size="6" align="right" maxlength="6"></td></tr>
-</tbody></table>
-
-<input type="button" value="COMPUTE" onclick="chain_length(this.form,form.pitch.value,form.drive_teeth.value,form.driven_teeth.value, form.distance.value)">
-
-</td>
-
-<td align="right">
-<table>
-<tbody><tr><td>Links </td><td><input name="links" size="5" readonly=""></td></tr>
-<tr><td>Length (inches) </td><td><input name="length" size="6" readonly=""></td></tr>
-<tr><td>Reduction Ratio </td><td><input name="ratio" size="6" readonly=""></td></tr>
-</tbody></table>
-
-</td>
- </tr>
+          <td align="right">
+            <table>
+              <tbody>
+                <tr>
+                  <td>Center Distance</td>
+                  <td> <input name="distance" size="6" readonly=""></td>
+                </tr>
+                <tr>
+                  <td>Reduction Ratio</td>
+                  <td> <input name="ratio" size="6" readonly=""></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
 
 
 
-<tr>
-    </font>
-    </td></tr>
- </tbody></table>
- </form>
- 
+        <tr>
+
+          </font>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+
+  <p>
+
+  </p>
+  <form name="chain_length_form" action="">
+    <table border="3" cellpadding="3" bgcolor="white" align="center" width="700">
+      <tbody>
+        <tr>
+          <th colspan="2">Chain Length Calculator</th>
+        </tr>
+
+        <tr>
+          <td align="center" width="450"> <b>Input</b>
+          </td>
+          <td align="center"><b>Output</b>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="right">
+
+
+            <table>
+              <tbody>
+                <tr>
+                  <td>Chain Pitch (inches) </td>
+                  <td> <input type="text" name="pitch" value=".25" size="5" align="right" maxlength="5"></td>
+                </tr>
+                <tr>
+                  <td>Drive Sprocket Teeth </td>
+                  <td> <input type="text" name="drive_teeth" size="4" align="right" maxlength="4"></td>
+                </tr>
+                <tr>
+                  <td>Driven Sprocket Teeth </td>
+                  <td> <input type="text" name="driven_teeth" size="4" align="right" maxlength="4"></td>
+                </tr>
+                <tr>
+                  <td>Center Distance (inches) </td>
+                  <td> <input type="text" name="distance" size="6" align="right" maxlength="6"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <input type="button" value="COMPUTE"
+              onclick="chain_length(this.form,form.pitch.value,form.drive_teeth.value,form.driven_teeth.value, form.distance.value)">
+
+          </td>
+
+          <td align="right">
+            <table>
+              <tbody>
+                <tr>
+                  <td>Links </td>
+                  <td><input name="links" size="5" readonly=""></td>
+                </tr>
+                <tr>
+                  <td>Length (inches) </td>
+                  <td><input name="length" size="6" readonly=""></td>
+                </tr>
+                <tr>
+                  <td>Reduction Ratio </td>
+                  <td><input name="ratio" size="6" readonly=""></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </td>
+        </tr>
+
+
+
+        <tr>
+          </font>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
 
 
 
@@ -196,10 +256,13 @@ function chain_length(dataform,pitch,N1,N2,distance)
       window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
       return false;
     }
+    document.getElementById('eventSearch').onsubmit = function () {
+      window.location = 'https://thenomadalliance.com/eventStats.html?event=' + document.getElementById('eventSearchName').value;
+      return false;
+    }
   </script>
-<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""></noscript>
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""></noscript>
 </body>
 
 </html>
- 

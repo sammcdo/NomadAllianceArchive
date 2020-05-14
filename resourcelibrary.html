@@ -63,6 +63,10 @@
       window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
       return false;
     }
+    document.getElementById('eventSearch').onsubmit = function () {
+      window.location = 'https://thenomadalliance.com/eventStats.html?event=' + document.getElementById('eventSearchName').value;
+      return false;
+    }
   </script>
   <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""></noscript>
