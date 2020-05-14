@@ -21,6 +21,26 @@
             width: 50%;
             float: right;
         }
+
+        .banner {
+            width: 120px;
+            height: 160px;
+            text-align: center;
+            background-color: chartreuse;
+            border-radius: 5px;
+        }
+
+        .banner img {
+            width: 80px;
+            align-content: center;
+            height: 75px;
+        }
+
+        #banners {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 10px;
+        }
     </style>
 </head>
 
@@ -42,19 +62,21 @@
 
 
     </div>
-    <div id="leftmain">
-        <div id="teamIcon"></div>
-        <div id="teamHeader"></div>
-        <div id=websites></div>
-        <div id=sponsors></div>
-    </div>
-    <div id="rightmain">
-        <h3>Team History</h3>
-        <div id=banners></div>
-        <div id=awards>
-            <h4>Other Awards</h4>
+    <div id="main">
+        <div id="leftmain">
+            <div id="teamIcon"></div>
+            <div id="teamHeader"></div>
+            <div id=websites></div>
+            <div id=sponsors></div>
         </div>
-        <div id=eventList></div>
+        <div id="rightmain">
+            <h3>Team History</h3>
+            <div id=banners></div>
+            <div id=awards>
+                <h4>Other Awards</h4>
+            </div>
+            <div id=eventList></div>
+        </div>
     </div>
     <div class="footer">
         <p>
