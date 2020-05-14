@@ -1,5 +1,5 @@
 function getEvent(eventName) {
-    tbaRequestHandler("event/"+eventName+"/teams", processEventTeams)
+    tbaRequestHandler("event/" + eventName + "/teams", processEventTeams)
 }
 
 function processEventTeams(json) {
@@ -8,18 +8,20 @@ function processEventTeams(json) {
     <th id="tnum" onclick="sortTableNumber(1)">Team Number</th>
     <th id="trank" onclick="sortTableNumber(2)">Wins</th>
     <th id="tbanners" onclick="sortTableNumber(3)">Banners</th>
+    <th id="lastwin" onclick="sortTableNumber(4)">Last Win Year</th>
     `
     $("#eventTableHeaders").append(header);
     for (team of json) {
-        text = "<tr id='"+team["key"]+"'>";
-        text += "<td><a href='teamHistory.html?team="+team["team_number"]+"'>"+team["nickname"]+"</a></td>";
-        text += "<td>"+team["team_number"]+"</td>";
+        text = "<tr id='" + team["key"] + "'>";
+        text += "<td><a href='teamHistory.html?team=" + team["team_number"] + "'>" + team["nickname"] + "</a></td>";
+        text += "<td>" + team["team_number"] + "</td>";
         text += "<td>0</td>";
         text += "<td>0</td>";
+        text += "<td></td>";
         text += "</tr>";
         $("#eventTableBody").append(text);
 
-        tbaRequestHandler("team/"+team["key"]+"/awards", pastEventInfo, team["key"])
+        tbaRequestHandler("team/" + team["key"] + "/awards", pastEventInfo, team["key"])
     }
 }
 
@@ -33,9 +35,17 @@ function pastEventInfo(json, params) {
         }
         if (award.award_type == AwardTypes.WINNER) {
             cols[2].innerHTML = Number(cols[2].innerHTML) + 1;
+            if (cols[4].innerHTML == "") {
+                cols[4].innerHTML = award.year;
+            }
+            else if (Number(cols[4].innerHTML) < award.year) {
+                cols[4].innerHTML = award.year;
+            }
+
         }
     }
 }
+
 
 
 function sortTable(n) {
