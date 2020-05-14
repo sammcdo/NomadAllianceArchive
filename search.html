@@ -8,10 +8,43 @@
     <title>the NOMAD alliance</title>
     <link rel="shortcut icon" type="image/x-icon" href="Scorpion.png" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src=main.js></script>
+    <script src=constants.js></script>
+    <script src=teamStats.js></script>
+    <script src=teamHistory.js></script>
+    <script src=events.js></script>
     <script type="text/javascript" src="jquery.autocomplete.min.js"></script>
     <script type="text/javascript" src="data.json"></script>
-    <base target="_blank" rel="noopener noreferrer"> <!-- Make links open in a new tab -->
+    <style type="text/css">
+        #leftmain {
+            width: 50%;
+            float: left;
+        }
+
+        #rightmain {
+            width: 50%;
+            float: right;
+        }
+
+        .banner {
+            width: 120px;
+            height: 160px;
+            text-align: center;
+            background-color: chartreuse;
+            border-radius: 5px;
+        }
+
+        .banner img {
+            width: 80px;
+            align-content: center;
+            height: 75px;
+        }
+
+        #banners {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,50 +63,57 @@
             <input type="submit" value="Go!">
         </form>
     </div>
-
-    <br>
-    <b>*This page is currently under development*</b><br><br>
-
-    <div class="resources">
-
-        <p>
-            <b>Welcome to the Strategy and Scouting Docs!</b> Here you can find plenty of helpful tools
-            to help you form your stategy and assist in your scouting.
-        </p>
-        <h3>Scouting</h3>
-        <table>
-            <tr>
-                <th>Resource Name</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td><a href="https://www.thebluealliance.com/">The Blue Alliance</a></td>
-                <td>The site that made this all possible, TBA has tons of information on their website and an amazing
-                    API for developers. Its fun to browse to keep up to date on all your favorite teams.</td>
-            </tr>
-            <tr>
-                <td><a href="http://viperbotsvalor6800.com/scout/">Viper Scout</a></td>
-                <td>This site gives amazing insights into any event happening at the time, including OPRs and match
-                    predictions.</td>
-            </tr>
-            <tr>
-                <td><a href="https://frc.divisions.co/">FRC Divisions</a></td>
-                <td>There is no better way to find out how you stand in the championship divisions. It allows you to
-                    compare the stats of tons of teams, based on which championship and which division they are a part
-                    of.</td>
-            </tr>
+    <div id="main">
+        <div id="leftmain">
+            <div id="teamIcon"></div>
+            <div id="teamHeader"></div>
+            <div id=websites></div>
+            <div id=sponsors></div>
+        </div>
+        <div id="rightmain">
+            <h3>Team History</h3>
+            <div id=banners></div>
+            <div id=awards>
+                <h4>Other Awards</h4>
+            </div>
+            <div id=eventList></div>
+        </div>
+        <table id="eventTable">
+            <thead>
+                <tr id=eventTableHeaders></tr>
+            </thead>
+            <tbody id="eventTableBody"></tbody>
         </table>
-
-        <br>
-
     </div>
-
     <div class="footer">
         <p>
-            The NOMAD Alliance © 2020. Any questions, comments, or concerns? Email
+            the NOMAD alliance © 2020. Any questions, comments, or concerns? Email
             <a href="emailUs.html">Sam and Ben</a>.
         </p>
     </div>
+    <script>
+        var team = Math.floor(Math.random() * 8428) + 1;
+        try {
+
+            var url = new URL(window.location.href);
+            for (param of url.searchParams.entries()) {
+                if (param[0] == "team") {
+                    team = param[1];
+                    getTeamHistory(team);
+                } else if (param[0] == "event") {
+                    event = param[1];
+                    getEvent(event);
+                    sortTable(0);
+                    console.log(event)
+                }
+
+            }
+        } catch (error) {
+            console.log(error);
+            var team = Math.floor(Math.random() * 8428) + 1;
+            getTeamHistory(team);
+        }
+    </script>
     <script>
         $(function () {
           // setup autocomplete function pulling from currencies[] array

@@ -10,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src=constants.js></script>
     <script src=events.js></script>
+    <script type="text/javascript" src="jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="data.json"></script>
     <base target="_blank" rel="noopener noreferrer">
     <style type="text/css">
         table td tr th {
@@ -29,12 +31,8 @@
         <a href="about.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
         <a href="emailUs.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
 
-        <form action="teamHistory.html" method="POST" id="teamSearch">
-            <input type="text" id="teamSearchName" name="team" placeholder="Enter team number..">
-            <input type="submit" value="Go!">
-        </form>
-        <form action="eventStats.html" method="POST" id="eventSearch">
-            <input type="text" id="eventSearchName" name="team" placeholder="Enter event code (ex. 2020casd)...">
+        <form action="search.html" id="search">
+            <input type="text" id="autocomplete" name="search" placeholder="Enter team or event code (ex. 2020casd)...">
             <input type="submit" value="Go!">
         </form>
     </div>
@@ -71,15 +69,22 @@
         console.log(event)
     </script>
     <script>
-        document.getElementById('teamSearch').onsubmit = function () {
-            window.location = 'https://thenomadalliance.com/teamHistory?team=' + document.getElementById('teamSearchName').value;
-            return false;
-        }
-        document.getElementById('eventSearch').onsubmit = function () {
-            window.location = 'https://thenomadalliance.com/eventStats.html?event=' + document.getElementById('eventSearchName').value;
-            return false;
-        }
-    </script>
+        $(function () {
+          // setup autocomplete function pulling from currencies[] array
+          $('#autocomplete').autocomplete({
+            lookup: data,
+            onSelect: function (suggestion) {
+              //var thehtml = '<strong>Currency Name:</strong> ' + suggestion.value + ' <br> <strong>Symbol:</strong> ' + suggestion.data;
+              //$('#outputcontent').html(thehtml);
+              console.log('https://thenomadalliance.com/search.html?' + suggestion.data[0]+"="+suggestion.data[1]);
+              window.location = 'search.html?' + suggestion.data[0]+"="+suggestion.data[1];
+              return false;
+            }
+          });
+    
+    
+        });
+      </script>
 </body>
 
 </html>
