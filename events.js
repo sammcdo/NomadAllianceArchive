@@ -9,6 +9,7 @@ function processEventTeams(json) {
     <th id="trank" onclick="sortTableNumber(2)">Wins</th>
     <th id="tbanners" onclick="sortTableNumber(3)">Banners</th>
     <th id="lastwin" onclick="sortTableNumber(4)">Last Win Year</th>
+    <th id="winpercent" onclick="sortTableNumber(5)">Win %</th>
     `
     $("#eventTableHeaders").append(header);
     for (team of json) {
@@ -18,6 +19,7 @@ function processEventTeams(json) {
         text += "<td>0</td>";
         text += "<td>0</td>";
         text += "<td></td>";
+        text += "<td>0</td>";
         text += "</tr>";
         $("#eventTableBody").append(text);
 
@@ -29,11 +31,13 @@ function processEventTeams(json) {
 function pastEventInfo(json, params) {
     row = document.getElementById(params[0]);
     cols = row.getElementsByTagName("TD");
+    wins = 0;
     for (award of json) {
         if (award.award_type in BannerWorthyAwards) {
             cols[3].innerHTML = Number(cols[3].innerHTML) + 1;
         }
         if (award.award_type == AwardTypes.WINNER) {
+            wins += 1;
             cols[2].innerHTML = Number(cols[2].innerHTML) + 1;
             if (cols[4].innerHTML == "") {
                 cols[4].innerHTML = award.year;
@@ -44,8 +48,14 @@ function pastEventInfo(json, params) {
 
         }
     }
+    tbaRequestHandler("team/"+params[0]+"/events/keys", winPercent, params[0], wins)
 }
 
+function winPercent(json, params) {
+    row = document.getElementById(params[0]);
+    cols = row.getElementsByTagName("TD");
+    cols[5].innerHTML = String(Number(params[1]*100/json.length).toFixed(3))
+}
 
 
 function sortTable(n) {
